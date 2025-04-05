@@ -18,3 +18,5 @@ To draw left click any area to draw the selected tile.
 Right click if you want this tile to be solid. This will set a is_solid to true.
 Enter to save the map and export to txt file. This file is in a csv type format. 
 Also all solid tiles with save with a 1 in the text file and non solids will be 0.
+F5 will run the game
+F8 will exit the game and go back to the editor.
