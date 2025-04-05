@@ -25,9 +25,6 @@ public:
   void update_mouse(Map &map) {}
 };
 
-// void cameraInput(Camera2D camera);
-// void cameraUpdate(Camera2D camera);
-
 int main() {
   // screen information
   std::cout << "main\n";
@@ -43,16 +40,6 @@ int main() {
   std::unique_ptr<Mouse> mouse = std::make_unique<Mouse>();
 
   // Camera information
-  Camera2D camera;
-  camera.offset = {200, 200};
-  camera.rotation = 0;
-  camera.zoom = 2;
-
-  float speed = 300.0;
-
-  RenderTexture view_port = LoadRenderTexture(screen_width/2, screen_height);
-  Rectangle screen_rect = {0.0,0.0,float(view_port.texture.width), -float(view_port.texture.height)};
-  
 
   Tile tile;
   std::unique_ptr<Map> map = std::make_unique<Map>();
@@ -102,27 +89,17 @@ int main() {
     }
         // Drawing information
 
-    BeginTextureMode(view_port);
-    BeginMode2D(camera);
 
-
-    map->draw_map();
-
-    EndMode2D();
-    EndTextureMode();
 
     BeginDrawing();
 
     // This is just for a little bit of screen formatting to make look more
     // readable
 
-    // DrawRectangle(0, 0, map->vec_size * map->grid_size, screen_height, GRAY);
-    // DrawRectangle(map->vec_size * map->grid_size, 0, screen_width - map->vec_size * map->grid_size, screen_height, DARKGRAY);
-    DrawTextureRec(view_port.texture, screen_rect, {0,0}, WHITE);
-
+    DrawRectangle(0, 0, map->vec_size * map->grid_size, screen_height, GRAY);
+    DrawRectangle(map->vec_size * map->grid_size, 0, screen_width - map->vec_size * map->grid_size, screen_height, DARKGRAY);
+    map->draw_map();
     // Drawing the map/atlas
-
-
     DrawTexture(map->atlas, map->vec_size * map->grid_size, 0, RAYWHITE);
     ClearBackground(BLACK);
     EndDrawing();
